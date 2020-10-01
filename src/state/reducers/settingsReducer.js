@@ -1,5 +1,5 @@
 const initialState = {
-  unit: 'celsius',
+  unit: 'metric',
   useLiveLocation: false,
   completedSetup: false, // TODO
 };

@@ -1,6 +1,8 @@
 import React from 'react';
 import { View, StyleSheet, Image } from 'react-native';
 
+import { useSelector } from 'react-redux';
+
 import Text from './Text';
 import { BACKGROUND_COLOR_DAY } from '../constants';
 
@@ -25,6 +27,8 @@ const styles = StyleSheet.create({
 });
 
 function CurrentTempDisplay() {
+  const currentWeatherData = useSelector((state) => state.weather.data.current);
+
   return (
     <View style={styles.tempDisplay}>
       <View style={styles.currentTemp}>
@@ -35,10 +39,15 @@ function CurrentTempDisplay() {
         >
           <Text fontFamily="Roboto-Bold" fontSize={96} color={BACKGROUND_COLOR_DAY}>°</Text>
         </View>
-        <Text fontFamily="Roboto-Bold" fontSize={96}>22</Text>
+        <Text fontFamily="Roboto-Bold" fontSize={96}>
+          {Math.ceil(currentWeatherData.main.temp)}
+        </Text>
         <Text fontFamily="Roboto-Bold" fontSize={96}>°</Text>
       </View>
-      <Text fontFamily="Roboto-Bold" fontSize={20}>25 / 10°C</Text>
+      <Text fontFamily="Roboto-Bold" fontSize={20}>
+        {/* eslint-disable-next-line max-len */}
+        {Math.ceil(currentWeatherData.main.temp_max)} / {Math.floor(currentWeatherData.main.temp_min)}°C
+      </Text>
       <Image
         source={{ uri: 'https://openweathermap.org/img/wn/02d@2x.png' }}
         style={styles.weatherImage}

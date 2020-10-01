@@ -12,5 +12,7 @@ module.exports = {
     'react/style-prop-object': 'off',
     'react/jsx-boolean-value': 'off',
     'no-param-reassign': [1, { 'props': false }],
+    'object-shorthand': 'off',
+    'react/jsx-one-expression-per-line': 'off',
   },
 };
