@@ -40,13 +40,13 @@ function CurrentTempDisplay() {
           <Text fontFamily="Roboto-Bold" fontSize={96} color={BACKGROUND_COLOR_DAY}>°</Text>
         </View>
         <Text fontFamily="Roboto-Bold" fontSize={96}>
-          {Math.ceil(currentWeatherData.main.temp)}
+          {Math.round(currentWeatherData.main.temp)}
         </Text>
         <Text fontFamily="Roboto-Bold" fontSize={96}>°</Text>
       </View>
       <Text fontFamily="Roboto-Bold" fontSize={20}>
         {/* eslint-disable-next-line max-len */}
-        {Math.ceil(currentWeatherData.main.temp_max)} / {Math.floor(currentWeatherData.main.temp_min)}°C
+        {Math.round(currentWeatherData.main.temp_max)} / {Math.floor(currentWeatherData.main.temp_min)}°C
       </Text>
       <Image
         source={{ uri: 'https://openweathermap.org/img/wn/02d@2x.png' }}
