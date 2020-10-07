@@ -1,7 +1,14 @@
 import React from 'react';
-import { View, StyleSheet, StatusBar } from 'react-native';
+import {
+  View,
+  TouchableHighlight,
+  StyleSheet,
+  StatusBar,
+} from 'react-native';
 
 import { useSelector } from 'react-redux';
+
+import PropTypes from 'prop-types';
 
 import Text from './Text';
 
@@ -21,7 +28,7 @@ const styles = StyleSheet.create({
   },
 });
 
-function Header() {
+function Header(props) {
   const location = useSelector((state) => getCurrentLocation(state));
 
   return (
@@ -30,9 +37,15 @@ function Header() {
         <Text fontFamily="Roboto-Bold" fontSize={22}>{location.name}</Text>
         <Text fontSize={10}>Net bijgewerkt</Text>
       </View>
-      <Text>Menu</Text>
+      <TouchableHighlight onPress={() => props.navigation.navigate('Settings')}>
+        <Text>Menu</Text>
+      </TouchableHighlight>
     </View>
   );
 }
+
+Header.propTypes = {
+  navigation: PropTypes.object.isRequired,
+};
 
 export default Header;

@@ -24,6 +24,9 @@ const styles = StyleSheet.create({
     width: 100,
     height: 100,
   },
+  weatherMinMax: {
+    marginTop: 5,
+  },
 });
 
 function CurrentTempDisplay() {
@@ -44,7 +47,7 @@ function CurrentTempDisplay() {
         </Text>
         <Text fontFamily="Roboto-Bold" fontSize={96}>°</Text>
       </View>
-      <Text fontFamily="Roboto-Bold" fontSize={20}>
+      <Text style={styles.weatherMinMax} fontFamily="Roboto-Bold" fontSize={20}>
         {/* eslint-disable-next-line max-len */}
         {Math.round(currentWeatherData.main.temp_max)} / {Math.floor(currentWeatherData.main.temp_min)}°C
       </Text>

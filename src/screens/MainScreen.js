@@ -8,6 +8,8 @@ import {
 
 import { useSelector, useDispatch } from 'react-redux';
 
+import PropTypes from 'prop-types';
+
 import Header from '../components/Header';
 import CurrentTempDisplay from '../components/CurrentTempDisplay';
 import Text from '../components/Text';
@@ -36,7 +38,7 @@ const styles = StyleSheet.create({
   },
 });
 
-function MainScreen() {
+function MainScreen(props) {
   const dispatch = useDispatch();
 
   const weatherLoaded = useSelector((state) => state.weather.loaded);
@@ -71,10 +73,14 @@ function MainScreen() {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Header />
+      <Header navigation={props.navigation} />
       <CurrentTempDisplay />
     </SafeAreaView>
   );
 }
+
+MainScreen.propTypes = {
+  navigation: PropTypes.object.isRequired,
+};
 
 export default MainScreen;

@@ -16,7 +16,7 @@ function Text(props) {
   });
 
   return (
-    <ReactText style={styles.text}>{props.children}</ReactText>
+    <ReactText style={[styles.text, props.style]}>{props.children}</ReactText>
   );
 }
 
@@ -25,12 +25,14 @@ Text.propTypes = {
   color: PropTypes.string,
   fontSize: PropTypes.number,
   fontFamily: PropTypes.string,
+  style: PropTypes.object,
 };
 
 Text.defaultProps = {
   color: DEFAULT_TEXT_COLOR,
   fontSize: 14,
   fontFamily: 'Roboto',
+  style: {},
 };
 
 export default Text;
