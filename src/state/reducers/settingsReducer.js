@@ -1,7 +1,19 @@
 const initialState = {
-  unit: 'metric',
-  useLiveLocation: false,
-  completedSetup: false, // TODO
+  useLiveLocation: {
+    value: false,
+    displayName: 'Live locatie',
+    onSettingsPage: true,
+  },
+  unit: {
+    value: 'metric',
+    displayName: 'Eenheden',
+    onSettingsPage: true,
+  },
+  completedSetup: {
+    value: false,
+    displayName: null,
+    onSettingsPage: false,
+  }, // TODO
 };
 
 function settingsReducer(state = initialState, action) {
@@ -13,14 +25,20 @@ function settingsReducer(state = initialState, action) {
     case 'SETTINGS_SET_UNIT': {
       return {
         ...state,
-        unit: action.payload,
+        unit: {
+          ...state.unit,
+          value: action.payload,
+        },
       };
     }
 
     case 'SETTINGS_SET_USE_LIVE_LOCATION': {
       return {
         ...state,
-        useLiveLocation: action.payload,
+        useLiveLocation: {
+          ...state.useLiveLocation,
+          value: action.payload,
+        },
       };
     }
   }

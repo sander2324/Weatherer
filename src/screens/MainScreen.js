@@ -45,7 +45,7 @@ function MainScreen(props) {
   const weatherError = useSelector((state) => state.weather.error);
   const weatherErrorText = useSelector((state) => state.weather.errorText);
   const location = useSelector((state) => getCurrentLocation(state));
-  const unit = useSelector((state) => state.settings.unit);
+  const unit = useSelector((state) => state.settings.unit.value);
 
   useEffect(() => {
     dispatch(fetchWeatherData(location.name, unit));
