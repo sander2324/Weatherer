@@ -32,6 +32,8 @@ const styles = StyleSheet.create({
 function CurrentTempDisplay() {
   const currentWeatherData = useSelector((state) => state.weather.data.current);
 
+  const weatherIconUrl = `https://openweathermap.org/img/wn/${currentWeatherData.weather[0].icon}@2x.png`;
+
   return (
     <View style={styles.tempDisplay}>
       <View style={styles.currentTemp}>
@@ -52,7 +54,7 @@ function CurrentTempDisplay() {
         {Math.round(currentWeatherData.main.temp_max)} / {Math.floor(currentWeatherData.main.temp_min)}°C
       </Text>
       <Image
-        source={{ uri: 'https://openweathermap.org/img/wn/02d@2x.png' }}
+        source={{ uri: weatherIconUrl }}
         style={styles.weatherImage}
       />
     </View>
