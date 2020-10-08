@@ -15,8 +15,14 @@ function Text(props) {
     },
   });
 
+  if (props.style) {
+    return (
+      <ReactText style={[styles.text, props.style]}>{props.children}</ReactText>
+    );
+  }
+
   return (
-    <ReactText style={[styles.text, props.style]}>{props.children}</ReactText>
+    <ReactText style={styles.text}>{props.children}</ReactText>
   );
 }
 
@@ -32,7 +38,7 @@ Text.defaultProps = {
   color: DEFAULT_TEXT_COLOR,
   fontSize: 14,
   fontFamily: 'Roboto',
-  style: {},
+  style: null,
 };
 
 export default Text;
