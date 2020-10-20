@@ -28,6 +28,7 @@ function RefreshWeatherScroll(props) {
     <ScrollView
       refreshControl={(
         <RefreshControl
+          progressViewOffset={30}
           refreshing={spinnerActivated && isLoading}
           onRefresh={() => updateWeather()}
         />

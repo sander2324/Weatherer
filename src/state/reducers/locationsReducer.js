@@ -7,7 +7,7 @@ const initialState = [
   },
   {
     id: 2,
-    name: 'London',
+    name: 'Bristol',
     current: false,
     live: true,
   },
