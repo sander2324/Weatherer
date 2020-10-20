@@ -26,6 +26,9 @@ const styles = StyleSheet.create({
     paddingLeft: 20,
     paddingRight: 20,
   },
+  menuButton: {
+    padding: 10,
+  },
 });
 
 function Header(props) {
@@ -37,7 +40,10 @@ function Header(props) {
         <Text fontFamily="Roboto-Bold" fontSize={22}>{location.name}</Text>
         <Text fontSize={10}>Net bijgewerkt</Text>
       </View>
-      <TouchableHighlight onPress={() => props.navigation.navigate('Settings')}>
+      <TouchableHighlight
+        onPress={() => props.navigation.navigate('Settings')}
+        style={styles.menuButton}
+      >
         <Text>Menu</Text>
       </TouchableHighlight>
     </View>
