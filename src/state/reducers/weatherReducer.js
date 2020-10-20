@@ -3,7 +3,7 @@ const initialState = {
     current: null,
     week_forecast: null,
   },
-  loaded: false,
+  isLoading: false,
   lastUpdated: null,
   error: false,
   errorText: '',
@@ -20,14 +20,14 @@ function weatherReducer(state = initialState, action) {
         ...state,
         data: action.payload.data,
         lastUpdated: action.payload.lastUpdated,
-        loaded: true,
+        isLoading: false,
       };
     }
 
-    case 'WEATHER_SET_LOADED': {
+    case 'WEATHER_SET_IS_LOADING': {
       return {
         ...state,
-        loaded: action.payload,
+        isLoading: action.payload,
       };
     }
 
@@ -36,6 +36,7 @@ function weatherReducer(state = initialState, action) {
         ...state,
         error: true,
         errorText: action.payload.errorText,
+        isLoading: false,
       };
     }
 

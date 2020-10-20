@@ -21,21 +21,21 @@ export function setWeatherError(errorText) {
   };
 }
 
-export function setWeatherLoaded(loadingState) {
+export function setWeatherisLoading(loadingState) {
   return {
-    type: 'WEATHER_SET_LOADED',
+    type: 'WEATHER_SET_IS_LOADING',
     payload: loadingState,
   };
 }
 
 export const clearWeatherError = () => ({ type: 'WEATHER_CLEAR_ERROR' });
 
-async function fetchCurrentWeatherData(city, unit) {
+async function fetchCurrentWeatherData(location, unit) {
   const apiKey = Constants.manifest.extra.owmApiKey;
 
   let response;
   try {
-    response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=${unit}`);
+    response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${apiKey}&units=${unit}`);
   } catch (e) {
     return [null, true];
   }
@@ -48,10 +48,13 @@ async function fetchCurrentWeatherData(city, unit) {
   return [data, false];
 }
 
-export function fetchWeatherData(city, unit) {
+export function fetchWeatherData(location, unit) {
   return async (dispatch) => {
-    dispatch(setWeatherLoaded(false));
-    const [currentWeatherData, currentWeatherDataError] = await fetchCurrentWeatherData(city, unit);
+    dispatch(setWeatherisLoading(true));
+    const [currentWeatherData, currentWeatherDataError] = await fetchCurrentWeatherData(
+      location,
+      unit,
+    );
     // TODO: Get forecastWeatherData
 
     if (currentWeatherDataError) {

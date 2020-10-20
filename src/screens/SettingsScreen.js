@@ -46,7 +46,7 @@ function SettingsScreen() {
   const settings = useSelector((state) => Object.fromEntries(
     Object.entries(state.settings).filter(([_key, value]) => value.onSettingsPage),
   ));
-  const currentLocation = useSelector((state) => getCurrentLocation(state));
+  const currentLocation = useSelector((state) => getCurrentLocation(state, false));
 
   return (
     <>
