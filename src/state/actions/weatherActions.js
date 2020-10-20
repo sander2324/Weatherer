@@ -1,5 +1,6 @@
 import Constants from 'expo-constants';
 
+import { getCurrentLocation } from '../selectors/locationSelectors';
 
 const FETCH_ERROR_MESSAGE = 'Kon weerdata niet ophalen';
 
@@ -48,12 +49,16 @@ async function fetchCurrentWeatherData(location, unit) {
   return [data, false];
 }
 
-export function fetchWeatherData(location, unit) {
-  return async (dispatch) => {
+export function fetchWeatherData() {
+  return async (dispatch, getState) => {
     dispatch(setWeatherisLoading(true));
+    const state = getState();
+    const location = getCurrentLocation(state);
+    const { unit } = state.settings;
+
     const [currentWeatherData, currentWeatherDataError] = await fetchCurrentWeatherData(
-      location,
-      unit,
+      location.name,
+      unit.value,
     );
     // TODO: Get forecastWeatherData
 

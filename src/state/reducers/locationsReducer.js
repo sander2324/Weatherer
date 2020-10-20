@@ -3,6 +3,13 @@ const initialState = [
     id: 1,
     name: 'Zwolle',
     current: true,
+    live: false,
+  },
+  {
+    id: 2,
+    name: 'London',
+    current: false,
+    live: true,
   },
 ];
 

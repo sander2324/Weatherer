@@ -15,7 +15,6 @@ import ErrorBox from '../components/ErrorBox';
 import RefreshWeatherScroll from '../components/RefreshWeatherScroll';
 
 import { fetchWeatherData } from '../state/actions/weatherActions';
-import { getCurrentLocation } from '../state/selectors/locationSelectors';
 
 import { BACKGROUND_COLOR_DAY } from '../constants';
 
@@ -34,12 +33,11 @@ function MainScreen(props) {
   const weatherInitialized = useSelector((state) => Boolean(state.weather.data.current));
   const weatherError = useSelector((state) => state.weather.error);
   const weatherErrorText = useSelector((state) => state.weather.errorText);
-  const location = useSelector((state) => getCurrentLocation(state));
-  const unit = useSelector((state) => state.settings.unit.value);
 
   useEffect(() => {
-    dispatch(fetchWeatherData(location.name, unit));
-  }, []);
+    const unsubscribe = props.navigation.addListener('focus', () => dispatch(fetchWeatherData()));
+    return unsubscribe;
+  }, [props.navigation]);
 
   if (!weatherInitialized) {
     return (

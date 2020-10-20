@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { ScrollView, RefreshControl } from 'react-native';
 
 import { useDispatch, useSelector } from 'react-redux';
@@ -6,23 +6,32 @@ import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import { fetchWeatherData } from '../state/actions/weatherActions';
-import { getCurrentLocation } from '../state/selectors/locationSelectors';
 
 
 function RefreshWeatherScroll(props) {
   const dispatch = useDispatch();
 
   const isLoading = useSelector((state) => state.weather.isLoading);
-  const location = useSelector((state) => getCurrentLocation(state));
-  const unit = useSelector((state) => state.settings.unit.value);
 
-  const updateWeather = () => dispatch(fetchWeatherData(location.name, unit));
+  const [spinnerActivated, setSpinnerActivated] = useState(false);
+
+  useEffect(() => {
+    if (!isLoading && spinnerActivated) setSpinnerActivated(false);
+  }, [isLoading]);
+
+  const updateWeather = () => {
+    setSpinnerActivated(true);
+    dispatch(fetchWeatherData());
+  };
 
   return (
     <ScrollView
-      refreshControl={
-        <RefreshControl refreshing={isLoading} onRefresh={() => updateWeather()} />
-      }
+      refreshControl={(
+        <RefreshControl
+          refreshing={spinnerActivated && isLoading}
+          onRefresh={() => updateWeather()}
+        />
+      )}
     >
       {props.children}
     </ScrollView>
