@@ -38,12 +38,16 @@ function SettingsScreen(props) {
             </View>
           </TouchableWithoutFeedback>
           <View style={globalStyles.horizontalLine} />
-          <TouchableWithoutFeedback
-            onPress={() => props.navigation.navigate('Locations')}
-          >
+          <TouchableWithoutFeedback onPress={() => props.navigation.navigate('Locations')}>
             <View style={globalStyles.setting}>
               <Text color="#000000" fontSize={20}>Locatie</Text>
               <Text color="#000000" fontSize={20} fontFamily="Roboto-Bold">{currentLocation.name}</Text>
+            </View>
+          </TouchableWithoutFeedback>
+          <View style={globalStyles.horizontalLine} />
+          <TouchableWithoutFeedback onPress={() => props.navigation.navigate('About')}>
+            <View style={[globalStyles.setting, globalStyles.justifyCenter]}>
+              <Text color="#000000" fontSize={20}>Over de app</Text>
             </View>
           </TouchableWithoutFeedback>
           <View style={globalStyles.horizontalLine} />
