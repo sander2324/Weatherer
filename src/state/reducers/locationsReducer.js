@@ -11,11 +11,17 @@ const initialState = [
     current: false,
     live: true,
   },
+  {
+    id: 3,
+    name: 'Deventer',
+    current: false,
+    live: false,
+  },
 ];
 
 
 function locationsReducer(state = initialState, action) {
-  switch (action.payload) {
+  switch (action.type) {
     default: {
       return state;
     }
