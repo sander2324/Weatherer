@@ -1,32 +1,36 @@
 require('dotenv').config();
 
 export default {
-  'expo': {
-    'name': 'weatherer',
-    'slug': 'weatherer',
-    'version': '1.0.0',
-    'orientation': 'portrait',
-    'entryPoint': './src/App.js',
-    'icon': './assets/icon.png',
-    'splash': {
-      'image': './assets/splash.png',
-      'resizeMode': 'contain',
-      'backgroundColor': '#ffffff'
+  expo: {
+    name: 'weatherer',
+    slug: 'weatherer',
+    version: '1.0.0',
+    orientation: 'portrait',
+    entryPoint: './src/App.js',
+    icon: './assets/icon.png',
+    splash: {
+      image: './assets/splash.png',
+      resizeMode: 'contain',
+      backgroundColor: '#ffffff'
     },
-    'updates': {
-      'fallbackToCacheTimeout': 0
+    updates: {
+      fallbackToCacheTimeout: 0
     },
-    'assetBundlePatterns': [
+    assetBundlePatterns: [
       '**/*'
     ],
-    'ios': {
-      'supportsTablet': true
+    ios: {
+      supportsTablet: true
     },
-    'web': {
-      'favicon': './assets/favicon.png'
+    web: {
+      favicon: './assets/favicon.png'
     },
-    'extra': {
-      'owmApiKey': process.env.OWM_API_KEY
+    extra: {
+      owmApiKey: process.env.OWM_API_KEY
+    },
+    android: {
+      package: 'nl.sander2324.weatherer',
+      versionCode: 1,
     },
   }
 }
