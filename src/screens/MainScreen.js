@@ -39,7 +39,7 @@ function MainScreen(props) {
     return unsubscribe;
   }, [props.navigation]);
 
-  if (!weatherInitialized) {
+  if (!weatherInitialized && !weatherError) {
     return (
       <SafeAreaView style={[styles.container, { justifyContent: 'center' }]}>
         <ActivityIndicator size="large" color="#f4f4f4" />
