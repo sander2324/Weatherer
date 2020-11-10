@@ -7,9 +7,11 @@ import thunk from 'redux-thunk';
 import PropTypes from 'prop-types';
 
 import rootReducer from '../state/reducers';
+import { asyncStorageSyncMiddleware } from '../state/middleware';
 
+const middlewares = [thunk, asyncStorageSyncMiddleware];
 
-const store = createStore(rootReducer, applyMiddleware(thunk));
+const store = createStore(rootReducer, applyMiddleware(...middlewares));
 
 
 function StateProvider(props) {

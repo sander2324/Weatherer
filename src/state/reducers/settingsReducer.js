@@ -41,6 +41,10 @@ function settingsReducer(state = initialState, action) {
         },
       };
     }
+
+    case 'SETTINGS_OVERRIDE_STATE': {
+      return action.payload;
+    }
   }
 }
 

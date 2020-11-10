@@ -4,13 +4,16 @@ import PropTypes from 'prop-types';
 
 import FontProvider from './FontProvider';
 import StateProvider from './StateProvider';
+import StateInitialContentProvider from './StateInitialContentProvider';
 
 
 function RootProvider(props) {
   return (
     <FontProvider>
       <StateProvider>
-        {props.children}
+        <StateInitialContentProvider>
+          {props.children}
+        </StateInitialContentProvider>
       </StateProvider>
     </FontProvider>
   );

@@ -17,6 +17,12 @@ const initialState = [
     current: false,
     live: false,
   },
+  {
+    id: 4,
+    name: 'Boston',
+    current: false,
+    live: false,
+  },
 ];
 
 
