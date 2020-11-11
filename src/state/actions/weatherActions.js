@@ -31,12 +31,12 @@ export function setWeatherisLoading(loadingState) {
 
 export const clearWeatherError = () => ({ type: 'WEATHER_CLEAR_ERROR' });
 
-async function fetchCurrentWeatherData(location, unit) {
+async function fetchCurrentWeatherData(locationName, unit) {
   const apiKey = Constants.manifest.extra.owmApiKey;
 
   let response;
   try {
-    response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${apiKey}&units=${unit}`);
+    response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${locationName}&appid=${apiKey}&units=${unit}`);
   } catch (e) {
     return [null, true];
   }
@@ -57,7 +57,7 @@ export function fetchWeatherData() {
     const { unit } = state.settings;
 
     const [currentWeatherData, currentWeatherDataError] = await fetchCurrentWeatherData(
-      location.name,
+      `${location.name}, ${location.countryCode}`,
       unit.value,
     );
     // TODO: Get forecastWeatherData
