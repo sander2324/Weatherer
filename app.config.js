@@ -2,7 +2,7 @@ require('dotenv').config();
 
 export default {
   expo: {
-    name: 'weatherer',
+    name: 'Weatherer',
     slug: 'weatherer',
     version: '1.0.0',
     orientation: 'portrait',
