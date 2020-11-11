@@ -1,38 +1,29 @@
 import React from 'react';
-import {
-  SafeAreaView,
-  View,
-  TouchableWithoutFeedback,
-} from 'react-native';
+import { SafeAreaView, ScrollView, View } from 'react-native';
 
 import { useSelector, useDispatch } from 'react-redux';
 
+import PropTypes from 'prop-types';
+
 import { StatusBar } from 'expo-status-bar';
 
-import Text from '../components/Text';
+import CenteredSettingItem from '../components/CenteredSettingItem';
 import globalStyles from '../globalStyles';
 import { setCurrentLocation } from '../state/actions/locationActions';
 
 
-function LocationScreen() {
+function LocationScreen(props) {
   const dispatch = useDispatch();
   const locations = useSelector((state) => state.locations.filter((loc) => !loc.live));
 
-  const locationsDisplay = locations.map((location) => (
+  const locationsSortedById = [...locations].sort((a, b) => a.id - b.id);
+  const locationsDisplay = locationsSortedById.map((location) => (
     <View key={location.id}>
-      <TouchableWithoutFeedback
+      <CenteredSettingItem
         onPress={() => dispatch(setCurrentLocation(location))}
-      >
-        <View style={[globalStyles.setting, globalStyles.justifyCenter]}>
-          <Text
-            color="#000000"
-            fontSize={20}
-            fontFamily={location.current ? 'Roboto-Bold' : 'Roboto'}
-          >
-            {location.name}
-          </Text>
-        </View>
-      </TouchableWithoutFeedback>
+        content={`${location.name}, ${location.countryCode}`}
+        boldText={location.current}
+      />
       <View style={globalStyles.horizontalLine} />
     </View>
   ));
@@ -40,13 +31,23 @@ function LocationScreen() {
   return (
     <>
       <SafeAreaView>
-        <View style={globalStyles.settingsContainer}>
+        <ScrollView style={globalStyles.settingsContainer}>
           {locationsDisplay}
-        </View>
+          <CenteredSettingItem
+            onPress={() => props.navigation.navigate('Locations Add')}
+            content="Voeg een plaats toe"
+            boldText={false}
+          />
+          <View style={globalStyles.horizontalLine} />
+        </ScrollView>
       </SafeAreaView>
       <StatusBar style="dark" />
     </>
   );
 }
+
+LocationScreen.propTypes = {
+  navigation: PropTypes.object.isRequired,
+};
 
 export default LocationScreen;

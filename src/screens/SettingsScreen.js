@@ -41,7 +41,7 @@ function SettingsScreen(props) {
           <TouchableWithoutFeedback onPress={() => props.navigation.navigate('Locations')}>
             <View style={globalStyles.setting}>
               <Text color="#000000" fontSize={20}>Locatie</Text>
-              <Text color="#000000" fontSize={20} fontFamily="Roboto-Bold">{currentLocation.name}</Text>
+              <Text color="#000000" fontSize={20} fontFamily="Roboto-Bold">{`${currentLocation.name}, ${currentLocation.countryCode}`}</Text>
             </View>
           </TouchableWithoutFeedback>
           <View style={globalStyles.horizontalLine} />
