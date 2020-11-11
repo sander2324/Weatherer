@@ -57,7 +57,7 @@ function AboutScreen() {
 
     if (copyrightInfoTapped >= 10 && copyrightInfoTapped < 15) {
       ToastAndroid.show(
-        `⚠️WARNING: You are ${totalClicks - copyrightInfoTapped} clicks away from clearing the app's local settings ⚠️`,
+        `⚠️ WARNING: You are ${totalClicks - copyrightInfoTapped} clicks away from clearing the app's local settings ⚠️`,
         ToastAndroid.SHORT,
       );
     }
