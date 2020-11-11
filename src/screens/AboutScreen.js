@@ -1,11 +1,15 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   SafeAreaView,
   StyleSheet,
   View,
   Image,
   TouchableHighlight,
+  TouchableWithoutFeedback,
+  ToastAndroid,
 } from 'react-native';
+
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { StatusBar } from 'expo-status-bar';
 import * as Linking from 'expo-linking';
@@ -46,6 +50,23 @@ const styles = StyleSheet.create({
 
 
 function AboutScreen() {
+  const [copyrightInfoTapped, setCopyrightInfoTapped] = useState(0);
+
+  useEffect(() => {
+    const totalClicks = 20;
+
+    if (copyrightInfoTapped >= 10 && copyrightInfoTapped < 15) {
+      ToastAndroid.show(
+        `⚠️WARNING: You are ${totalClicks - copyrightInfoTapped} clicks away from clearing the app's local settings ⚠️`,
+        ToastAndroid.SHORT,
+      );
+    }
+    if (copyrightInfoTapped === totalClicks) {
+      AsyncStorage.clear();
+      ToastAndroid.show('AsyncStorage has been cleared', ToastAndroid.LONG);
+    }
+  }, [copyrightInfoTapped]);
+
   return (
     <>
       <SafeAreaView>
@@ -65,9 +86,13 @@ function AboutScreen() {
               </TouchableHighlight>
             </View>
           </View>
-          <View style={styles.copyrightInfo}>
-            <Text color="#000000">&copy; Sander2324</Text>
-          </View>
+          <TouchableWithoutFeedback
+            onPress={() => setCopyrightInfoTapped((oldState) => oldState + 1)}
+          >
+            <View style={styles.copyrightInfo}>
+              <Text color="#000000">&copy; Sander2324</Text>
+            </View>
+          </TouchableWithoutFeedback>
         </View>
       </SafeAreaView>
       <StatusBar style="dark" />
