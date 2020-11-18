@@ -13,6 +13,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { StatusBar } from 'expo-status-bar';
 import * as Linking from 'expo-linking';
+import Constants from 'expo-constants';
 
 import Text from '../components/Text';
 
@@ -73,7 +74,7 @@ function AboutScreen() {
         <View style={styles.aboutContainer}>
           <View style={styles.infoContainer}>
             <Text color="#000000" fontSize={50} fontFamily="Roboto-Bold">Weatherer</Text>
-            <Text color="#000000" fontSize={20}>1.0.0</Text>
+            <Text color="#000000" fontSize={20}>{Constants.manifest.version}</Text>
             <View style={styles.links}>
               <TouchableHighlight style={styles.githubInfo} onPress={() => Linking.openURL('https://github.com/sander2324/Weatherer')}>
                 <>
