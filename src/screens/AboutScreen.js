@@ -3,7 +3,6 @@ import {
   SafeAreaView,
   StyleSheet,
   View,
-  Image,
   TouchableHighlight,
   TouchableWithoutFeedback,
   ToastAndroid,
@@ -14,6 +13,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { StatusBar } from 'expo-status-bar';
 import * as Linking from 'expo-linking';
 import Constants from 'expo-constants';
+
+import { Icon } from 'react-native-elements';
 
 import Text from '../components/Text';
 
@@ -40,8 +41,6 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   githubInfoIcon: {
-    width: 20,
-    height: 20,
     marginRight: 5,
   },
   links: {
@@ -78,8 +77,10 @@ function AboutScreen() {
             <View style={styles.links}>
               <TouchableHighlight style={styles.githubInfo} onPress={() => Linking.openURL('https://github.com/sander2324/Weatherer')}>
                 <>
-                  <Image
-                    source={{ uri: 'https://image.flaticon.com/icons/png/512/25/25231.png' }}
+                  <Icon
+                    color="#000000"
+                    name="github"
+                    type="font-awesome"
                     style={styles.githubInfoIcon}
                   />
                   <Text color="#000000" fontSize={18}>Source code</Text>
