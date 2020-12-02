@@ -12,9 +12,17 @@ import { StatusBar } from 'expo-status-bar';
 
 import CenteredSettingItem from '../components/CenteredSettingItem';
 import SettingItem from '../components/SettingItem';
-import { setUseLiveLocation } from '../state/actions/settingsActions';
+import { setUnit, setUseLiveLocation } from '../state/actions/settingsActions';
 import { getCurrentLocation } from '../state/selectors/locationSelectors';
 import globalStyles from '../globalStyles';
+import { METRIC_UNIT_VALUE, IMPERIAL_UNIT_VALUE } from '../constants';
+
+
+const unitOptions = [METRIC_UNIT_VALUE, IMPERIAL_UNIT_VALUE];
+const unitDisplayNames = new Map([
+  [METRIC_UNIT_VALUE, 'Metriek'],
+  [IMPERIAL_UNIT_VALUE, 'Imperiaal'],
+]);
 
 
 function SettingsScreen(props) {
@@ -24,6 +32,13 @@ function SettingsScreen(props) {
     Object.entries(state.settings).filter(([_key, value]) => value.onSettingsPage),
   ));
   const currentLocation = useSelector((state) => getCurrentLocation(state, false));
+
+  const cycleUnit = () => {
+    const currentUnitValue = settings.unit.value;
+    const unitOptionIndex = unitOptions.indexOf(currentUnitValue);
+    const newUnitValue = unitOptions[(unitOptionIndex + 1) % unitOptions.length];
+    dispatch(setUnit(newUnitValue));
+  };
 
   return (
     <>
@@ -39,6 +54,12 @@ function SettingsScreen(props) {
             onPress={() => props.navigation.navigate('Locations')}
             title="Locatie"
             value={`${currentLocation.name}, ${currentLocation.countryCode}`}
+          />
+          <View style={globalStyles.horizontalLine} />
+          <SettingItem
+            onPress={() => cycleUnit()}
+            title={settings.unit.displayName}
+            value={unitDisplayNames.get(settings.unit.value)}
           />
           <View style={globalStyles.horizontalLine} />
           <CenteredSettingItem

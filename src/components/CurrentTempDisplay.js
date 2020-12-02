@@ -4,7 +4,7 @@ import { View, StyleSheet, Image } from 'react-native';
 import { useSelector } from 'react-redux';
 
 import Text from './Text';
-import { BACKGROUND_COLOR_DAY } from '../constants';
+import { BACKGROUND_COLOR_DAY, METRIC_UNIT_VALUE, IMPERIAL_UNIT_VALUE } from '../constants';
 
 
 const styles = StyleSheet.create({
@@ -29,8 +29,14 @@ const styles = StyleSheet.create({
   },
 });
 
+const unitSymbols = new Map([
+  [METRIC_UNIT_VALUE, '°C'],
+  [IMPERIAL_UNIT_VALUE, '°F'],
+]);
+
 function CurrentTempDisplay() {
   const currentWeatherData = useSelector((state) => state.weather.data.current);
+  const unit = useSelector((state) => state.settings.unit.value);
 
   const weatherIconUrl = `https://openweathermap.org/img/wn/${currentWeatherData.weather[0].icon}@2x.png`;
 
@@ -51,7 +57,7 @@ function CurrentTempDisplay() {
       </View>
       <Text style={styles.weatherMinMax} fontFamily="Roboto-Bold" fontSize={20}>
         {/* eslint-disable-next-line max-len */}
-        {Math.round(currentWeatherData.main.temp_max)} / {Math.floor(currentWeatherData.main.temp_min)}°C
+        {Math.round(currentWeatherData.main.temp_max)} / {Math.floor(currentWeatherData.main.temp_min)}{unitSymbols.get(unit)}
       </Text>
       <Image
         source={{ uri: weatherIconUrl }}

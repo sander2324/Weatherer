@@ -1,3 +1,5 @@
+import { METRIC_UNIT_VALUE } from '../../constants';
+
 const initialState = {
   useLiveLocation: {
     value: false,
@@ -5,7 +7,7 @@ const initialState = {
     onSettingsPage: true,
   },
   unit: {
-    value: 'metric',
+    value: METRIC_UNIT_VALUE,
     displayName: 'Eenheden',
     onSettingsPage: true,
   },

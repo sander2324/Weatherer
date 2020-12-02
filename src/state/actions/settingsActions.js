@@ -12,3 +12,10 @@ export function overrideSettingsState(value) {
     payload: value,
   };
 }
+
+export function setUnit(value) {
+  return {
+    type: 'SETTINGS_SET_UNIT',
+    payload: value,
+  };
+}

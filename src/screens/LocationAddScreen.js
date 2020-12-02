@@ -54,7 +54,7 @@ function LocationAddScreen(props) {
       // Openweathermap doesn't list this API endpoint on their docs as far is I know.
       // The owm website uses this url endpoint (with this specific API key included,
       // my own doesn't even work) when you search for a place.
-      const response = await fetch(`https://openweathermap.org/data/2.5/find?q=${locationInput}&appid=439d4b804bc8187953eb36d2a8c26a02&units=metric`);
+      const response = await fetch(`https://openweathermap.org/data/2.5/find?q=${locationInput}&appid=439d4b804bc8187953eb36d2a8c26a02`);
       if (response.status !== 200) {
         setLocations([]);
         return;
