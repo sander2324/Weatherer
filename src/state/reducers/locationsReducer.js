@@ -4,28 +4,24 @@ const initialState = [
     name: 'Zwolle',
     countryCode: 'NL',
     current: true,
-    live: false,
   },
   {
     id: 2,
     name: 'Bristol',
     countryCode: 'UK',
     current: false,
-    live: true,
   },
   {
     id: 3,
     name: 'Deventer',
     countryCode: 'NL',
     current: false,
-    live: false,
   },
   {
     id: 4,
     name: 'Boston',
     countryCode: 'US',
     current: false,
-    live: false,
   },
 ];
 

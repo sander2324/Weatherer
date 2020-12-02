@@ -6,7 +6,7 @@ export function setCurrentLocation(location) {
 }
 
 
-export function addLocation(name, countryCode, live = false) {
+export function addLocation(name, countryCode) {
   return (dispatch, getState) => {
     const { locations } = getState();
 
@@ -20,7 +20,6 @@ export function addLocation(name, countryCode, live = false) {
         name: name,
         countryCode: countryCode,
         current: false,
-        live: live,
       },
     });
   };

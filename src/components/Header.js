@@ -51,7 +51,7 @@ function Header(props) {
   return (
     <View style={styles.header}>
       <View>
-        <Text fontFamily="Roboto-Bold" fontSize={22}>{location.name}</Text>
+        {location && <Text fontFamily="Roboto-Bold" fontSize={22}>{location.name}</Text>}
         {lastUpdatedMessage && <Text fontSize={10}>{lastUpdatedMessage}</Text>}
       </View>
       <TouchableHighlight

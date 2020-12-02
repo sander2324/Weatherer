@@ -1,6 +1,5 @@
-import Constants from 'expo-constants';
-
 import { getCurrentLocation } from '../selectors/locationSelectors';
+import { getWeatherApiUrl } from '../../utils';
 
 const FETCH_ERROR_MESSAGE = 'Kon weerdata niet ophalen';
 
@@ -31,12 +30,16 @@ export function setWeatherisLoading(loadingState) {
 
 export const clearWeatherError = () => ({ type: 'WEATHER_CLEAR_ERROR' });
 
-async function fetchCurrentWeatherData(locationName, unit) {
-  const apiKey = Constants.manifest.extra.owmApiKey;
+async function fetchCurrentWeatherData(settings, storedLocation) {
+  const url = await getWeatherApiUrl(storedLocation, settings);
+
+  if (!url) {
+    return [null, true];
+  }
 
   let response;
   try {
-    response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${locationName}&appid=${apiKey}&units=${unit}`);
+    response = await fetch(url);
   } catch (e) {
     return [null, true];
   }
@@ -54,11 +57,10 @@ export function fetchWeatherData() {
     dispatch(setWeatherisLoading(true));
     const state = getState();
     const location = getCurrentLocation(state);
-    const { unit } = state.settings;
 
     const [currentWeatherData, currentWeatherDataError] = await fetchCurrentWeatherData(
-      `${location.name}, ${location.countryCode}`,
-      unit.value,
+      location,
+      state.settings,
     );
     // TODO: Get forecastWeatherData
 

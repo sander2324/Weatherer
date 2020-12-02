@@ -31,6 +31,7 @@ export default {
     android: {
       package: 'nl.sander2324.weatherer',
       versionCode: 1,
+      permissions: ['ACCESS_FINE_LOCATION', 'ACCESS_COARSE_LOCATION'],
     },
   }
 }
