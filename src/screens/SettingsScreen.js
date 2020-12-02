@@ -2,7 +2,6 @@ import React from 'react';
 import {
   View,
   SafeAreaView,
-  TouchableWithoutFeedback,
 } from 'react-native';
 
 import { useSelector, useDispatch } from 'react-redux';
@@ -11,7 +10,8 @@ import PropTypes from 'prop-types';
 
 import { StatusBar } from 'expo-status-bar';
 
-import Text from '../components/Text';
+import CenteredSettingItem from '../components/CenteredSettingItem';
+import SettingItem from '../components/SettingItem';
 import { setUseLiveLocation } from '../state/actions/settingsActions';
 import { getCurrentLocation } from '../state/selectors/locationSelectors';
 import globalStyles from '../globalStyles';
@@ -29,27 +29,22 @@ function SettingsScreen(props) {
     <>
       <SafeAreaView>
         <View style={globalStyles.settingsContainer}>
-          <TouchableWithoutFeedback
+          <SettingItem
             onPress={() => dispatch(setUseLiveLocation(!settings.useLiveLocation.value))}
-          >
-            <View style={globalStyles.setting}>
-              <Text color="#000000" fontSize={20}>{settings.useLiveLocation.displayName}</Text>
-              <Text color="#000000" fontSize={20} fontFamily="Roboto-Bold">{settings.useLiveLocation.value ? 'Aan' : 'Uit'}</Text>
-            </View>
-          </TouchableWithoutFeedback>
+            title={settings.useLiveLocation.displayName}
+            value={settings.useLiveLocation.value ? 'Aan' : 'Uit'}
+          />
           <View style={globalStyles.horizontalLine} />
-          <TouchableWithoutFeedback onPress={() => props.navigation.navigate('Locations')}>
-            <View style={globalStyles.setting}>
-              <Text color="#000000" fontSize={20}>Locatie</Text>
-              <Text color="#000000" fontSize={20} fontFamily="Roboto-Bold">{`${currentLocation.name}, ${currentLocation.countryCode}`}</Text>
-            </View>
-          </TouchableWithoutFeedback>
+          <SettingItem
+            onPress={() => props.navigation.navigate('Locations')}
+            title="Locatie"
+            value={`${currentLocation.name}, ${currentLocation.countryCode}`}
+          />
           <View style={globalStyles.horizontalLine} />
-          <TouchableWithoutFeedback onPress={() => props.navigation.navigate('About')}>
-            <View style={[globalStyles.setting, globalStyles.justifyCenter]}>
-              <Text color="#000000" fontSize={20}>Over de app</Text>
-            </View>
-          </TouchableWithoutFeedback>
+          <CenteredSettingItem
+            onPress={() => props.navigation.navigate('About')}
+            content="Over de app"
+          />
           <View style={globalStyles.horizontalLine} />
         </View>
       </SafeAreaView>
