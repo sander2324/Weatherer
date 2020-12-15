@@ -57,3 +57,30 @@ export function getChunkArray(arr, chunkSize) {
 
   return accumulator;
 }
+
+export function getCompassValueFromDegree(deg) {
+  if (!deg || deg < 0 || deg > 360) return '?';
+
+  const compassValues = [
+    'N',
+    'NNO',
+    'NO',
+    'ONO',
+    'O',
+    'OZO',
+    'ZO',
+    'ZZO',
+    'Z',
+    'ZZW',
+    'ZW',
+    'WZW',
+    'W',
+    'WNW',
+    'NW',
+    'NNW',
+    'N',
+  ];
+
+  const index = Math.round(deg / 22.5);
+  return compassValues[index];
+}

@@ -1,9 +1,11 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 
+import { useSelector } from 'react-redux';
+
 import Text from './Text';
 
-import { getChunkArray } from '../utils';
+import { getChunkArray, getCompassValueFromDegree } from '../utils';
 
 
 const styles = StyleSheet.create({
@@ -46,17 +48,19 @@ const styles = StyleSheet.create({
 
 
 function ExtraWeatherInfo() {
+  const currentWeatherData = useSelector((state) => state.weather.data.current);
+
   const extraWeatherData = [
     {
-      value: '46 bar',
+      value: `${currentWeatherData.main.pressure} hPa`,
       label: 'Luchtdruk',
     },
     {
-      value: 'NW',
+      value: getCompassValueFromDegree(currentWeatherData.wind.deg),
       label: 'Windrichting',
     },
     {
-      value: '10 km/u',
+      value: `${currentWeatherData.wind.speed} m/s`,
       label: 'Windshelheid',
     },
   ];
