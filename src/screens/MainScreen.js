@@ -3,6 +3,7 @@ import {
   SafeAreaView,
   StyleSheet,
   ActivityIndicator,
+  View,
 } from 'react-native';
 
 import { useSelector, useDispatch } from 'react-redux';
@@ -10,6 +11,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import Header from '../components/Header';
+import ExtraWeatherInfo from '../components/ExtraWeatherInfo';
 import CurrentTempDisplay from '../components/CurrentTempDisplay';
 import ErrorBox from '../components/ErrorBox';
 import RefreshWeatherScroll from '../components/RefreshWeatherScroll';
@@ -24,6 +26,9 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     backgroundColor: BACKGROUND_COLOR_DAY,
+  },
+  spacer: {
+    marginBottom: 75,
   },
 });
 
@@ -51,7 +56,13 @@ function MainScreen(props) {
     <SafeAreaView style={styles.container}>
       <RefreshWeatherScroll>
         <Header navigation={props.navigation} />
-        {weatherError ? <ErrorBox errorText={weatherErrorText} /> : <CurrentTempDisplay />}
+        {weatherError ? <ErrorBox errorText={weatherErrorText} /> : (
+          <>
+            <CurrentTempDisplay />
+            <View style={styles.spacer} />
+            <ExtraWeatherInfo />
+          </>
+        )}
       </RefreshWeatherScroll>
     </SafeAreaView>
   );

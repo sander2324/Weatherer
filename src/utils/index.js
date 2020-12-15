@@ -44,3 +44,16 @@ export async function getWeatherApiUrl(settings, storedLocation) {
 
   return `https://api.openweathermap.org/data/2.5/weather?lat=${liveLocation.coords.latitude}&lon=${liveLocation.coords.longitude}&appid=${apiKey}&units=${settings.unit.value}`;
 }
+
+
+// Split an array in to an array of chunk arrays
+// getChunkArray([1, 2, 3, 4], 2) -> [[1, 2], [3, 4]]
+export function getChunkArray(arr, chunkSize) {
+  const accumulator = [];
+
+  for (let i = 0; i < arr.length; i += chunkSize) {
+    accumulator.push(arr.slice(i, i + chunkSize));
+  }
+
+  return accumulator;
+}
