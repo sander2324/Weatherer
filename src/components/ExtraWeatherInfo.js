@@ -6,6 +6,7 @@ import { useSelector } from 'react-redux';
 import Text from './Text';
 
 import { getChunkArray, getCompassValueFromDegree } from '../utils';
+import { IMPERIAL_UNIT_VALUE, METRIC_UNIT_VALUE } from '../constants';
 
 
 const styles = StyleSheet.create({
@@ -47,8 +48,14 @@ const styles = StyleSheet.create({
 });
 
 
+const windspeedValues = new Map([
+  [METRIC_UNIT_VALUE, 'm/s'],
+  [IMPERIAL_UNIT_VALUE, 'mph'],
+]);
+
 function ExtraWeatherInfo() {
   const currentWeatherData = useSelector((state) => state.weather.data.current);
+  const unit = useSelector((state) => state.settings.unit.value);
 
   const extraWeatherData = [
     {
@@ -60,7 +67,7 @@ function ExtraWeatherInfo() {
       label: 'Windrichting',
     },
     {
-      value: `${currentWeatherData.wind.speed} m/s`,
+      value: `${currentWeatherData.wind.speed} ${windspeedValues.get(unit)}`,
       label: 'Windshelheid',
     },
   ];
